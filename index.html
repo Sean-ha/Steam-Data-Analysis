@@ -14265,7 +14265,7 @@ a.anchor-link {
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h1><p>The video games industry is larger than it has ever been, with a global market value of over \$100 billion. In 2021, it is expected to reach approximately \\$140 billion. There are various devices through which these games are distributed, including computers, game consoles, and smartphones. For each of these devices, there usually exist various storefronts through which games are sold. Examples of this include the Apple App Store for Apple devices, the Google Play Store for Android devices, the PlayStation Store for PlayStation consoles, and Steam for PCs. While there exist many other storefronts for PCs, we will be focusing our analysis on Steam, as it is currently the largest PC digital distributor for games.</p>
+<h1 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h1><p>The video games industry is larger than it has ever been, with a global market value of over \$100 billion. In 2021, it is expected to reach approximately \$140 billion. There are various devices through which these games are distributed, including computers, game consoles, and smartphones. For each of these devices, there usually exist various storefronts through which games are sold. Examples of this include the Apple App Store for Apple devices, the Google Play Store for Android devices, the PlayStation Store for PlayStation consoles, and Steam for PCs. While there exist many other storefronts for PCs, we will be focusing our analysis on Steam, as it is currently the largest PC digital distributor for games.</p>
 <p>Developing video games takes lots of time and money. If we could analyze data of existing games, we could perhaps reach conclusions about what types of games would be the most successful, or profitable, and minimize the chances of developing a game that will not sell particularly well. If you were a game designer or a manager at a game studio, you very well might be interested in this sort of data and analysis.</p>
 <p>In recent times, through technological advancements and the rise of the internet, the barrier of entry for making a game has been drastically lowered. As a result, there has been a surge of "indie" game developers (usually classified by a small development team, that does not have the financial support of a large game publisher). These indie game developers are usually short on cash, and are relying on the success of their project to stay afloat. This type of data might be very useful to these "indies," as it could help them make an informed decision about what type of game to develop, and specific factors to think about that might maximize the chances of a successful game.</p>
 
@@ -14898,7 +14898,7 @@ a.anchor-link {
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Now let's clean up the "SupportedLanguages" column. Currently, some observations contain unnecessary information in that column. What we what to extract is the number of languages that a particular game supports. In addition, we will want to take a look at some major languages, and see what impact they might have on the success of a game. We could hypothetically perform this on every single language, but since there are so many, we will limit our analysis to a few major ones. If you are interested in a particular language that I do not include, feel free to try it out yourself and see what kind of results you get!</p>
-<p>What we will do is split the data in "SupportedLanguages" up into a few new ones. One for the number of languages the game supports ("LangSupportedCount"). And then additional columns for whether or not a particular game supports a particular language (e.g. a column named "SupportsEnglish" would contain 1 if the game support English, and 0 if it does not).</p>
+<p>What we will do is split the data in "SupportedLanguages" up into a few new columns. One for the number of languages the game supports ("LangSupportedCount"). And then additional columns for whether or not a particular game supports a particular language (e.g. a column named "SupportsEnglish" would contain 1 if the game support English, and 0 if it does not).</p>
 <p>The "SupportedLanguages" column contains a bunch of data mashed together. This will separate the different parts of the data from one column into multiple columns, making it easier for analysis in the future. We want multiple columns to contain specialized information, as opposed to having one column with very general information.</p>
 <p>For this project, here are the languages that we will create specific columns for:</p>
 <ul>
@@ -14981,7 +14981,7 @@ a.anchor-link {
 <p>Next, we will convert the boolean columns into integer columns. So in other words, True becomes 1, and False becomes 0.  This will allow us to perform operations on these columns that can only be done on numerical values.</p>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
@@ -14991,6 +14991,7 @@ a.anchor-link {
 <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -14998,10 +14999,197 @@ a.anchor-link {
 </div>
 </div>
 
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>QueryID</th>
+      <th>ResponseID</th>
+      <th>QueryName</th>
+      <th>ResponseName</th>
+      <th>ReleaseDate</th>
+      <th>RequiredAge</th>
+      <th>Metacritic</th>
+      <th>RecommendationCount</th>
+      <th>ScreenshotCount</th>
+      <th>SteamSpyOwners</th>
+      <th>...</th>
+      <th>GenreIsRacing</th>
+      <th>GenreIsMassivelyMultiplayer</th>
+      <th>Price</th>
+      <th>LangSupportCount</th>
+      <th>SupportsEnglish</th>
+      <th>SupportsFrench</th>
+      <th>SupportsSpanish</th>
+      <th>SupportsJapanese</th>
+      <th>SupportsChinese</th>
+      <th>SupportsKorean</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>10</td>
+      <td>10</td>
+      <td>Counter-Strike</td>
+      <td>Counter-Strike</td>
+      <td>Nov 1 2000</td>
+      <td>0</td>
+      <td>88</td>
+      <td>68991</td>
+      <td>13</td>
+      <td>13033334</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>9.99</td>
+      <td>8</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>20</td>
+      <td>20</td>
+      <td>Team Fortress Classic</td>
+      <td>Team Fortress Classic</td>
+      <td>Apr 1 1999</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2439</td>
+      <td>5</td>
+      <td>5399140</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4.99</td>
+      <td>5</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>30</td>
+      <td>30</td>
+      <td>Day of Defeat</td>
+      <td>Day of Defeat</td>
+      <td>May 1 2003</td>
+      <td>0</td>
+      <td>79</td>
+      <td>2319</td>
+      <td>5</td>
+      <td>7621102</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4.99</td>
+      <td>5</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>40</td>
+      <td>40</td>
+      <td>Deathmatch Classic</td>
+      <td>Deathmatch Classic</td>
+      <td>Jun 1 2001</td>
+      <td>0</td>
+      <td>0</td>
+      <td>888</td>
+      <td>4</td>
+      <td>7498965</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4.99</td>
+      <td>5</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>50</td>
+      <td>50</td>
+      <td>Half-Life: Opposing Force</td>
+      <td>Half-Life: Opposing Force</td>
+      <td>Nov 1 1999</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2934</td>
+      <td>5</td>
+      <td>5399499</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4.99</td>
+      <td>4</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 44 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>It turns out that certain columns and rows may have data that is not good to work with. In particular, the table contains observations for not only the games themselves, but also for their DLCs (additional downloadable content). We want to remove these observations, as they are essentially causing repeat rows.</p>
+<p>It turns out that certain columns and rows may have data that is not good to work with. In particular, the table contains observations for not only the games themselves, but also for their DLCs (additional downloadable content), and any other possible store results. We want to remove these observations, as they are essentially causing repeat rows.</p>
 <p>In addition, there appear to be repeated observations without any identifiable cause. One example is the following:</p>
 
 </div>
@@ -15202,7 +15390,7 @@ a.anchor-link {
 <p>Then we will also rename ResponseName to GameName to better describe the data it contains.</p>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
@@ -15210,11 +15398,199 @@ a.anchor-link {
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;QueryID&#39;</span><span class="p">,</span> <span class="s1">&#39;ResponseID&#39;</span><span class="p">,</span> <span class="s1">&#39;QueryName&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;ResponseName&#39;</span><span class="p">:</span> <span class="s1">&#39;GameName&#39;</span><span class="p">})</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>GameName</th>
+      <th>ReleaseDate</th>
+      <th>RequiredAge</th>
+      <th>Metacritic</th>
+      <th>RecommendationCount</th>
+      <th>ScreenshotCount</th>
+      <th>SteamSpyOwners</th>
+      <th>SteamSpyPlayersEstimate</th>
+      <th>AchievementCount</th>
+      <th>ControllerSupport</th>
+      <th>...</th>
+      <th>GenreIsRacing</th>
+      <th>GenreIsMassivelyMultiplayer</th>
+      <th>Price</th>
+      <th>LangSupportCount</th>
+      <th>SupportsEnglish</th>
+      <th>SupportsFrench</th>
+      <th>SupportsSpanish</th>
+      <th>SupportsJapanese</th>
+      <th>SupportsChinese</th>
+      <th>SupportsKorean</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Counter-Strike</td>
+      <td>Nov 1 2000</td>
+      <td>0</td>
+      <td>88</td>
+      <td>68991</td>
+      <td>13</td>
+      <td>13033334</td>
+      <td>9140731</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>9.99</td>
+      <td>8</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Team Fortress Classic</td>
+      <td>Apr 1 1999</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2439</td>
+      <td>5</td>
+      <td>5399140</td>
+      <td>753627</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4.99</td>
+      <td>5</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Day of Defeat</td>
+      <td>May 1 2003</td>
+      <td>0</td>
+      <td>79</td>
+      <td>2319</td>
+      <td>5</td>
+      <td>7621102</td>
+      <td>1709740</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4.99</td>
+      <td>5</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Deathmatch Classic</td>
+      <td>Jun 1 2001</td>
+      <td>0</td>
+      <td>0</td>
+      <td>888</td>
+      <td>4</td>
+      <td>7498965</td>
+      <td>789676</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4.99</td>
+      <td>5</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Half-Life: Opposing Force</td>
+      <td>Nov 1 1999</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2934</td>
+      <td>5</td>
+      <td>5399499</td>
+      <td>705741</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4.99</td>
+      <td>4</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 41 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -16330,7 +16706,7 @@ a.anchor-link {
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create new column &#39;StandardizedRec&#39;</span>
 <span class="n">df</span><span class="p">[</span><span class="s1">&#39;StandardizedRec&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;RecommendationCount&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;SteamSpyPlayersEstimate&#39;</span><span class="p">]</span>
-<span class="c1"># Convert inf to NaN</span>
+<span class="c1"># Convert inf to NaN (inf might be caused by dividing by zero)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;StandardizedRec&#39;</span><span class="p">]),</span> <span class="s1">&#39;StandardizedRec&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
 </pre></div>
 
@@ -16753,7 +17129,7 @@ a.anchor-link {
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The chart seems massive and overwhelming, but we can mainly focus on the rows "Metacritic", "StandardizedRec", and "SteamSpyOwners", as they are our dependent variables.</p>
+<p>The chart seems massive and overwhelming, but we can mainly focus on the rows "Metacritic", "StandardizedRec", and "SteamSpyOwners", as they are our dependent variables for classifying a success.</p>
 <p>This correlation matrix can provide a lot of insights that may be valuable to investigate further. For example, something that is interesting is that it appears that having Spanish support in your game correlates with the number of people that own your game, and the number of people that might recommend your game. In addition, games that are free seem to be owned by more players than those that are not free. It also appears that the factors for measuring success are all positively correlated, denoted by the high correlations in the bottom right corner. And naturally, the languages are correlated as well. In other words, games that support one foreign language are likely to support other foreign languages as well.</p>
 <p>A couple of interesting points (not relating to success of a game) are that the number of games that are classified as "indie" correlates with release year. In addition, it seems that indie games are generally single player, and classified as action games. Also, free games tend to be multiplayer games, and they tend to contain in app purchases (which makes sense from a monetization standpoint).</p>
 <p>It is important to note that while there might exist correlations between two variables, that does not necessarily mean that one causes the other (i.e. correlation does not imply causation). In addition, there could be plenty of other factors that might cause one variable to correlate with another, which are not accounted for in this matrix. As a result, we cannot necessarily draw conclusions from this matrix alone. However, it allows us to get a sense of the data, and get a feel for what sort of things we might want to investigate further.</p>
@@ -16967,7 +17343,7 @@ a.anchor-link {
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>There are some things to consider from these charts. Clearly, free to play games and MMO (Massively Multiplayer Online) games have the most owners out of any of the genres. This makes sense, since they are completely free, so there is no loss from getting the game, as opposed to a paid game. However, it seems that while free to play games are owned by many people, they are not very likely to be recommended, indicated by their relatively low recommendations per player number. On the other hand, MMOs have a lot of owners, and also a high recommendation per player number. Metacritic scores seem to be fairly equal across all genres, though there is an interesting increase for Early Access games.</p>
+<p>There are some things to consider from these charts. Clearly, free to play games and MMO (Massively Multiplayer Online) games have the most owners out of any of the genres. This makes sense, since they are completely free, so there is no loss from getting the game, as opposed to a paid game. However, it seems that while free to play games are owned by many people, they are not very likely to be recommended, indicated by their relatively low recommendations per player number. On the other hand, MMOs have a lot of owners, and also a high recommendation per player number. Metacritic scores seem to be fairly equal across all genres, though there is an interesting increase for Early Access games. A possible cause for this could be the smaller sample size, as there are likely less EarlyAccess games than the other genres.</p>
 
 </div>
 </div>
@@ -17117,7 +17493,7 @@ Maybe create linear regression model predicting metacritic, avg reviews, owners 
   <th>Date:</th>             <td>Mon, 17 May 2021</td> <th>  Prob (F-statistic):</th> <td>2.90e-22</td> 
 </tr>
 <tr>
-  <th>Time:</th>                 <td>03:48:57</td>     <th>  Log-Likelihood:    </th> <td> -8174.3</td> 
+  <th>Time:</th>                 <td>17:29:36</td>     <th>  Log-Likelihood:    </th> <td> -8174.3</td> 
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>  2151</td>      <th>  AIC:               </th> <td>1.638e+04</td>
@@ -17361,7 +17737,7 @@ Maybe create linear regression model predicting metacritic, avg reviews, owners 
   <th>Date:</th>             <td>Mon, 17 May 2021</td> <th>  Prob (F-statistic):</th> <td>7.04e-132</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>03:48:58</td>     <th>  Log-Likelihood:    </th> <td> -34119.</td> 
+  <th>Time:</th>                 <td>17:29:37</td>     <th>  Log-Likelihood:    </th> <td> -34119.</td> 
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>  2138</td>      <th>  AIC:               </th> <td>6.829e+04</td>
@@ -17571,7 +17947,7 @@ Maybe create linear regression model predicting metacritic, avg reviews, owners 
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>In this project, we first tidied up our dataset. We made sure all of the data conformed to a set of rules that we defined, that would make it easy to work with. Then, we visualized the dataset through various graphs and plots. Through this, we were able to see how the data was distributed, and got a good overview of how the data might look. Next, we explored the dataset by searching for factors that might correlate with a successful game. Finally, we tried fitting linear models on the dataset, to get a model that could predict a game's success through various factors regarding the game, like the genre it is, or the year it was released.</p>
-<p>As one can imagine, it is incredibly difficult to predict what sort of factors would result in a successful game. This is due to a variety of factors, including that games are incredibly subjective. In addition, there are so many factors that are impossible to quantify, such as game quality, polish, and feel. In terms of things that we can quantify, this project has some shortcomings as well. It might be important to consider the budget on which games are being developed. For example, if you are a small studio making games, you might want to compare yourself against other games with a similar budget, rather than with massive companies with millions of dollars.</p>
+<p>As one can imagine, it is incredibly difficult to predict what sort of factors would result in a successful game. First of all, our dataset is far from perfect. We do not know the exact numbers of owners for each game (as Steam does not provide such data), so we must rely on SteamSpy estimates. In addition, not all games on Steam are classified correctly by genre, making it difficult to know exactly what genre each game actually is. Another reason is that games are incredibly subjective. There are so many factors that are impossible to quantify, such as game quality, polish, and feel. It would be incredibly difficult to somehow come up with a model that takes all of these things into account, if it is even possible. In terms of things that we can quantify, this project has some shortcomings as well. It might be important to consider the budget on which games are being developed. For example, if you are a small studio making games, you might want to compare yourself against other games with a similar budget, rather than with massive companies with millions of dollars.</p>
 <p>There is a ton of data in this dataset, so there is a lot of different analyses that could be made. In addition, I wasn't able to use some of the data that I tidied, as there are so many factors to consider. I definitely encourage you to take a look at it yourself, and see what sort of insights you might be able to derive, if you are interested in the topic.</p>
 <p>I hope this project helped you get a good introduction to the data science pipeline, and provided you with some insights into what sort of factors MIGHT go into making a "successful" game. At the very least, I hope you are able to walk away knowing a little bit more about game development, the statistics of Steam games, and maybe a little bit of inspiration to look deeper into these things yourself!</p>
 
